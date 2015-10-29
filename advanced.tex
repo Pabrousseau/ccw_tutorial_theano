@@ -305,15 +305,15 @@ This is the C code equivalent to \code{perform}
 
 \begin{frame}{Constructor Arguments}
 \begin{itemize}
-\item Basically you just pass two arguments to the constructor of COp
+\item Basically you just pass arguments to the constructor of COp
 \begin{itemize}
 \item Either by calling the constructor directly \code{COp.__init__(self, ...)}
 \item Or via the superclass \code{super(MyOp, self).__init__(...)}
 \end{itemize}
-\item The two arguments are:
+\item The arguments are:
 \begin{itemize}
-\item the name of the C code file
-\item the name of the function to call to make the computation
+\item a list of file names with code sections (relative to the location of the op class)
+\item the name of a function to call to make the computation (optional)
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -354,22 +354,42 @@ Work through the "08\_scalmulc" directory available at \url{https://github.com/a
 \end{itemize}
 \end{frame}
 
-\section{How to Make a Complex Op}
+\section{Op Params}
 
 \begin{frame}[plain]{}
 \begin{center}
-\Huge How to Make a Complex Op
+\Huge Op Params
 \end{center}
 \end{frame}
 
-\begin{frame}{\code{make_thunk}}
-\lstinputlisting[linerange={12-14}]{thunk.py}
+\begin{frame}{Purpose}
 \begin{itemize}
-\item Define instead of \code{perform} or \code{c_code}
-\item Gives total freedom on how the computation is performed
-\item More complex to use and generally not needed
+\item Used to pass information to the C code
+\item Can reduce the amount of compiled C code
+\item Required for things that can change from one script run to the other.
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Usage}
+\lstinputlisting{params.py}
+\end{frame}
+
+%\section{How to Make a Complex Op}
+
+%\begin{frame}[plain]{}
+%\begin{center}
+%\Huge How to Make a Complex Op
+%\end{center}
+%\end{frame}
+
+%\begin{frame}{\code{make_thunk}}
+%\lstinputlisting[linerange={12-14}]{thunk.py}
+%\begin{itemize}
+%\item Define instead of \code{perform} or \code{c_code}
+%\item Gives total freedom on how the computation is performed
+%\item More complex to use and generally not needed
+%\end{itemize}
+%\end{frame}
 
 \section{Optimizations}
 
